@@ -35,6 +35,7 @@ const managerInfo = async () => {
     .then((response) => {
       const managerInfo = response;
       console.log(managerInfo);
+      teamInfo();
     });
 };
 const manager = new Manager(
@@ -44,8 +45,6 @@ const manager = new Manager(
   managerInfo.officeNumber
 );
 myTeam.push(manager);
-
-teamInfo();
 
 const teamInfo = async () => {
   const userSelection = await inquirer.prompt([
