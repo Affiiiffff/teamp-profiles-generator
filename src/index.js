@@ -2,9 +2,11 @@ const inquirer = require("inquirer");
 const Manager = require("../lib/Manager");
 const Engineer = require("../lib/Engineer");
 const Intern = require("../lib/Intern");
+
 const generateHTML = require("./generateHTML");
 const fs = require("fs");
 const path = require("path");
+
 const myTeam = [];
 
 const managerInfo = async () => {
@@ -92,7 +94,7 @@ const newEngineer = async () => {
     selection.email,
     selection.githubUsername
   );
-  teamMembers.push(engineer);
+  myTeam.push(engineer);
   teamInfo();
 };
 
@@ -128,13 +130,6 @@ const newIntern = async () => {
   );
   myTeam.push(intern);
   teamInfo();
-};
-
-const initializeTeam = () => {
-  if (!fs.existsSync(OUTPUT_DIR)) {
-    fs.mkdirSync(OUTPUT_DIR);
-  }
-  fs.writeFileSync(outputPath, generateHTML(teamMembers), "utf-8");
 };
 
 managerInfo();
