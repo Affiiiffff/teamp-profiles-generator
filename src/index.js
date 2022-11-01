@@ -2,7 +2,7 @@ const inquirer = require("inquirer");
 const Manager = require("../lib/Manager");
 const Engineer = require("../lib/Engineer");
 const Intern = require("../lib/Intern");
-// const generateHTML = require("./generateHTML");
+const generateHTML = require("./generateHTML");
 const fs = require("fs");
 const path = require("path");
 const myTeam = [];
@@ -94,6 +94,47 @@ const newEngineer = async () => {
   );
   teamMembers.push(engineer);
   teamInfo();
+};
+
+const newIntern = async () => {
+  const selection = await inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "What is your name",
+    },
+    {
+      type: "input",
+      name: "employeeId",
+      message: "What is your employee ID",
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "what is your email address",
+    },
+    {
+      type: "input",
+      name: "school",
+      message: "What is the name of your school",
+    },
+  ]);
+  console.log(selection);
+  const intern = new Intern(
+    selection.name,
+    selection.employeeId,
+    selection.email,
+    selection.school
+  );
+  myTeam.push(intern);
+  teamInfo();
+};
+
+const initializeTeam = () => {
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR);
+  }
+  fs.writeFileSync(outputPath, generateHTML(teamMembers), "utf-8");
 };
 
 managerInfo();
