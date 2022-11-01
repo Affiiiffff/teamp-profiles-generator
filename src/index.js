@@ -5,6 +5,7 @@ const Intern = require("../lib/Intern");
 // const generateHTML = require("./generateHTML");
 const fs = require("fs");
 const path = require("path");
+const myTeam = [];
 
 const managerInfo = async () => {
   inquirer
@@ -17,12 +18,12 @@ const managerInfo = async () => {
 
       {
         type: "input",
-        name: "ID",
+        name: "id",
         message: "Please enter your ID",
       },
       {
         type: "input",
-        name: "Email",
+        name: "email",
         message: "Please enter your Email",
       },
       {
@@ -32,15 +33,45 @@ const managerInfo = async () => {
       },
     ])
     .then((response) => {
-      const answers = response;
-      console.log(answers);
+      const managerInfo = response;
+      console.log(managerInfo);
     });
+};
+const manager = new Manager(
+  managerInfo.name,
+  managerInfo.id,
+  managerInfo.Email,
+  managerInfo.officeNumber
+);
+myTeam.push(manager);
+
+teamInfo();
+
+const teamInfo = async () => {
+  const userSelection = await inquirer.prompt([
+    {
+      type: "list",
+      name: "mainMenu",
+      message: "Which of the following would you like to do:",
+      choices: ["Add engineer", "Add Intern", "finish"],
+    },
+  ]);
+  switch (userSelection.mainMenu) {
+    case "Add engineer":
+      promptEngineer();
+      break;
+    case "add Intern":
+      promptIntern();
+      break;
+    default:
+      buildTeam();
+  }
 };
 
 managerInfo();
 
 // const teamInfo = async () => {
-//   const answers = await inquirer.prompt([
+//   const managerInfo = await inquirer.prompt([
 //     {
 //       type: "list",
 //       name: "role",
@@ -146,8 +177,8 @@ managerInfo();
 //   </body>
 // </html>`
 
-// .then((answers) => {
-//   const htmlContent = generateMarkdown(answers);
+// .then((managerInfo) => {
+//   const htmlContent = generateMarkdown(managerInfo);
 
 //   fs.writeFile("MyTeam.html",htmlContent , (err) =>
 //   err ? console.log(err) : console.log("Successfully created HTML")
