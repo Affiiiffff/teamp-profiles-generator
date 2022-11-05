@@ -36,7 +36,7 @@ const managerInfo = async () => {
   console.log(answers);
   const manager = new Manager(
     answers.name,
-    answers.employeeId,
+    answers.id,
     answers.email,
     answers.officeNumber
   );
@@ -57,7 +57,7 @@ const teamInfo = async () => {
     case "Add engineer":
       newEngineer();
       break;
-    case "add Intern":
+    case "Add Intern":
       newIntern();
       break;
     default:
@@ -130,6 +130,25 @@ const newIntern = async () => {
   );
   myTeam.push(intern);
   teamInfo();
+};
+
+const initializeTeam = () => {
+  let generatedHTML = generateHTML.header();
+  console.log(myTeam);
+  myTeam.map(function (employee) {
+    if (employee.getRole() == "Manager") {
+      generatedHTML += generateHTML.createManager(employee);
+    }
+    if (employee.getRole() == "Engineer") {
+      generatedHTML += generateHTML.createEngineer(employee);
+    }
+    if (employee.getRole() == "Intern") {
+      generatedHTML += generateHTML.createIntern(employee);
+    }
+  });
+  generatedHTML += generateHTML.footer();
+  // add check if dist exists
+  fs.writeFile("../dist/index.html", generatedHTML, function () {});
 };
 
 managerInfo();

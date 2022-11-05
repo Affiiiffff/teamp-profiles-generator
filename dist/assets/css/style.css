@@ -1,0 +1,15 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  font-size: 125px;
+  background-color: brown;
+  color: aliceblue;
+}
+
+.main {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
