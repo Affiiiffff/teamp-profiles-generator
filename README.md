@@ -3,6 +3,7 @@
 # Link to demo vid
 
 [Link to Demo Vid](https://drive.google.com/file/d/1p6m086JSHokQC1P7YBWIcdKBDENXLGsr/view)
+![screenshot of application](./dist/assets/Screenshot_20221105_221648.png)
 
 ## Table of Contents
 
